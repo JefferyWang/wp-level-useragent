@@ -5,7 +5,7 @@
     box-sizing: content-box;
 }
 
-.ds-comment-header {
+.wp-level-useragent {
     height: 21px;
     border: 0;
     padding: 0;
@@ -19,15 +19,20 @@
     overflow: visible;
     transition: none;
 }
+.wp-level-useragent span {
+    height:21px;
+    line-height: 21px;
+    display: inline-block;
+}
 
-.ds-comment-header .user-admin-gw, .user-admin-gw {
+.wp-level-useragent .user-admin-gw, .user-admin-gw {
     background-image: url(../images/p-lvAdmin.png) !important;
     background-position: left 0 !important;
     background-repeat: no-repeat !important;
     _background-image: url(../images/g-lvAdmin.gif) !important;
 }
 
-.ds-comment-header .user-admin-gw i, .user-admin-gw {
+.wp-level-useragent .user-admin-gw i, .user-admin-gw {
     background-image: url(../images/p-lvAdminbg.png) !important;
     background-position: right 0 !important;
     background-repeat: no-repeat !important;
@@ -35,32 +40,32 @@
     _background-image: url(../images/g-lvAdminbg.gif) !important;
 }
 
-.ds-comment-header .user-1-gw, .user-1-gw {
+.wp-level-useragent .user-1-gw, .user-1-gw {
     background-image: url(../images/p-lv01.png) !important;
     _background-image: url(../images/g-lv01.gif) !important;
 }
 
-.ds-comment-header .user-2-gw, .user-2-gw {
+.wp-level-useragent .user-2-gw, .user-2-gw {
     background-image: url(../images/p-lv02.png) !important;
     _background-image: url(../images/g-lv02.gif) !important;
 }
 
-.ds-comment-header .user-3-gw, .user-3-gw {
+.wp-level-useragent .user-3-gw, .user-3-gw {
     background-image: url(../images/p-lv03.png) !important;
     _background-image: url(../images/g-lv03.gif) !important;
 }
 
-.ds-comment-header .user-4-gw, .user-4-gw {
+.wp-level-useragent .user-4-gw, .user-4-gw {
     background-image: url(../images/p-lv04.png) !important;
     _background-image: url(../images/g-lv04.gif) !important;
 }
 
-.ds-comment-header .user-1-4-gw, .user-1-4-gw {
+.wp-level-useragent .user-1-4-gw, .user-1-4-gw {
     background-position: left 0 !important;
     background-repeat: no-repeat !important;
 }
 
-.ds-comment-header .user-1-4-gw i, .user-1-4-gw {
+.wp-level-useragent .user-1-4-gw i, .user-1-4-gw {
     background-image: url(../images/p-lv01-04.png) !important;
     background-position: right 0 !important;
     background-repeat: no-repeat !important;
@@ -68,27 +73,27 @@
     _background-image: url(../images/g-lv01-04.gif) !important;
 }
 
-.ds-comment-header .user-5-gw, .user-5-gw {
+.wp-level-useragent .user-5-gw, .user-5-gw {
     background-image: url(../images/p-lv05.png) !important;
     _background-image: url(../images/g-lv05.gif) !important;
 }
 
-.ds-comment-header .user-6-gw, .user-6-gw {
+.wp-level-useragent .user-6-gw, .user-6-gw {
     background-image: url(../images/p-lv06.png) !important;
     __background-image: url(../images/g-lv06.gif) !important;
 }
 
-.ds-comment-header .user-7-gw, .user-7-gw {
+.wp-level-useragent .user-7-gw, .user-7-gw {
     background-image: url(../images/p-lv07.png) !important;
     _background-image: url(../images/g-lv07.gif) !important;
 }
 
-.ds-comment-header .user-5-7-gw, .user-5-7-gw {
+.wp-level-useragent .user-5-7-gw, .user-5-7-gw {
     background-position: left 0 !important;
     background-repeat: no-repeat !important;
 }
 
-.ds-comment-header .user-5-7-gw i, .user-5-7-gw {
+.wp-level-useragent .user-5-7-gw i, .user-5-7-gw {
     background-image: url(../images/p-lv05-07.png) !important;
     background-position: right 0 !important;
     background-repeat: no-repeat !important;
@@ -96,27 +101,27 @@
     _background-image: url(../images/g-lv05-07.gif) !important;
 }
 
-.ds-comment-header .user-8-gw, .user-8-gw {
+.wp-level-useragent .user-8-gw, .user-8-gw {
     background-image: url(../images/p-lv08.png) !important;
     _background-image: url(../images/g-lv08.gif) !important;
 }
 
-.ds-comment-header .user-9-gw, .user-9-gw {
+.wp-level-useragent .user-9-gw, .user-9-gw {
     background-image: url(../images/p-lv09.png) !important;
     _background-image: url(../images/g-lv09.gif) !important;
 }
 
-.ds-comment-header .user-10-gw, .user-10-gw {
+.wp-level-useragent .user-10-gw, .user-10-gw {
     background-image: url(../images/p-lv10.png) !important;
     _background-image: url(../images/g-lv10.gif) !important;
 }
 
-.ds-comment-header .user-8-10-gw, .user-8-10-gw {
+.wp-level-useragent .user-8-10-gw, .user-8-10-gw {
     background-position: left 0 !important;
     background-repeat: no-repeat !important;
 }
 
-.ds-comment-header .user-8-10-gw i, .user-8-10-gw {
+.wp-level-useragent .user-8-10-gw i, .user-8-10-gw {
     background-image: url(../images/p-lv08-10.png) !important;
     background-position: right 0 !important;
     background-repeat: no-repeat !important;
@@ -128,7 +133,7 @@ i, em {
     font-style: normal !important;
 }
 
-.ds-comment-header .user-level-gw {
+.wp-level-useragent .user-level-gw {
     display: inline-block !important;
     height: 21px !important;
     padding: 0 0 0 24px !important;
@@ -138,7 +143,7 @@ i, em {
     cursor: pointer !important;
 }
 
-.ds-comment-header .user-level-gw i {
+.wp-level-useragent .user-level-gw i {
     display: inline-block !important;
     height: 21px !important;
     line-height: 23px !important;
@@ -155,9 +160,8 @@ span.ua {
     font-family: "Micorsoft Yahei", "微软雅黑";
     font-size: 14px;
     padding-left: 5px;
-    /*text-transform: Capitalize!important;
-    float: right!important;
-    line-height: 18px!important;*/
+    text-transform: Capitalize!important;
+    line-height: 18px!important;
 }
 
 .ua_other.os_other {

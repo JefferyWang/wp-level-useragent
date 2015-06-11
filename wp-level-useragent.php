@@ -85,7 +85,7 @@ function display_level_useragent()
         $os = detect_os();
         $webbrowser = detect_webbrowser();
 
-        $ua = '<div class="ds-comment-header">'.$level.$webbrowser.$os.'</div>';
+        $ua = '<div class="wp-level-useragent">'.$level.$webbrowser.$os.'</div>';
     }
 
     if (empty($_POST['comment_post_ID'])) {

@@ -65,7 +65,7 @@ function user_level($user_email)
         '9' => '传说',
         '10' => '神话',
     );
-    return '<span class="user-level-gw user-' . $level_type . '-gw user-' . $level . '-gw" title="等级'
+    return '<span class="ua user-level-gw user-' . $level_type . '-gw user-' . $level . '-gw" title="等级'
     . $level . '：' . $level_array[$level] . '
 
 等级规则：
