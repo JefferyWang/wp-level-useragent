@@ -19,9 +19,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 function user_level($user_email)
 {
     global $wpdb;
-    $querystr = "SELECT comment_author_email FROM wp_comments where comment_author_email='" . $user_email . "' AND comment_author_email<>'' AND comment_author_email<>'407586321@qq.com'";
+
+    // 如果为管理员账号，则直接返回
+    if ($user_email == '407586321@qq.com') {
+        return '<span class="ua user-admin-gw user-level-gw"><i>站长</i></span>';
+    }
+
+    $querystr = "SELECT `comment_author_email` FROM `wp_comments` where `comment_author_email`='" . $user_email . "' AND `comment_author_email` <> '' AND `comment_author_email` <> '407586321@qq.com'";
     $results = $wpdb->get_results($querystr);
     $mun = (count($results));
+
     if ($mun <= 5) {
         $level = 1;
         $level_type = "1-4";
