@@ -35,32 +35,72 @@ if (!defined('WP_PLUGIN_URL'))
 if (!defined('WP_PLUGIN_DIR'))
     define('WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
 
+$default_options = array(
+    'display_position' => 'after',
+    'show_level' => '1',
+    'show_os' => '1',
+    'show_browser' => '1',
+    'level_name' => array('潜水','冒泡','吐槽','活跃','话唠','畅言','专家','大师','传说','神话'),
+    'level_count' => array(5,10,15,20,25,30,35,40,45),
+    'admin_email' => '',
+);
+
 // 插件配置信息
-$ua_output_location = 'default';
+$jw_wlu_options = get_option('jw_wp_level_useragent_options', $default_options);
+$jw_wlu_display_position = $jw_wlu_options['display_position'];
+$jw_wlu_show_level = $jw_wlu_options['show_level'];
+$jw_wlu_show_os = $jw_wlu_options['show_os'];
+$jw_wlu_show_browser = $jw_wlu_options['show_browser'];
+$jw_wlu_level_name = $jw_wlu_options['level_name'];
+$jw_wlu_level_count = $jw_wlu_options['level_count'];
+$jw_wlu_admin_email = $jw_wlu_options['admin_email'];
+
 $css_url = WP_PLUGIN_URL . "/wp-level-useragent/css/ua.css";
 
-
-include(WP_PLUGIN_DIR . '/wp-level-useragent/lib/wp-useragent-detect-os.php');
-include(WP_PLUGIN_DIR . '/wp-level-useragent/lib/wp-useragent-detect-webbrowser.php');
-include(WP_PLUGIN_DIR . '/wp-level-useragent/lib/wp-useragent-level.php');
+include(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-detect-os.php');
+include(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-detect-webbrowser.php');
+include(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-level.php');
 
 // 主函数
 function wp_level_useragent()
 {
     if (is_single() || is_page()) {
-        global $comment, $useragent;
+        global $comment, $useragent,$jw_wlu_display_position;
 
         get_currentuserinfo();
 
-
         $useragent = wp_strip_all_tags($comment->comment_agent, false);
-
-        ua_comment();
-        display_level_useragent();
-        add_filter('comment_text', 'wp_level_useragent');
+        if($jw_wlu_display_position=="before")
+        {
+            display_level_useragent();
+            ua_comment();
+            add_filter('comment_text', 'wp_level_useragent');
+        }
+        elseif($jw_wlu_display_position=="after")
+        {
+            ua_comment();
+            display_level_useragent();
+            add_filter('comment_text', 'wp_level_useragent');
+        }
+        elseif($jw_wlu_display_position=="custom")
+        {
+            display_level_useragent();
+        }
     }
 }
 
+/**
+ * 插件启用时初始化
+ */
+register_activation_hook( __FILE__, 'jw_wlu_active');
+function jw_wlu_active() {
+    global $default_options;
+    update_option( 'jw_wp_level_useragent_options', $default_options );
+}
+
+/**
+ * 添加需要的css文件
+ */
 function css() {
     wp_register_style( 'us_css', plugins_url( 'css/ua.css' , __FILE__ ));
     wp_register_style( 'font_css', 'http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css');
@@ -69,21 +109,27 @@ function css() {
         wp_enqueue_style( 'font_css' );
     }
 }
-add_action( 'wp_head', 'css' );
+if ( !is_admin() ) {
+    add_action( 'wp_head', 'css' );
+}
 
+/**
+ * 展示函数
+ */
 function display_level_useragent()
 {
-    global $comment;
+    global $comment,$jw_wlu_admin_email,$jw_wlu_show_level,$jw_wlu_show_os,$jw_wlu_show_browser;
 
     if ($comment->comment_type == 'trackback' || $comment->comment_type == 'pingback') {
         $ua = "";
     } else {
-        $level = "";
-        if ($comment->comment_author_email != '') {
-            $level = user_level($comment->comment_author_email);
+        $level = $webbrowser = "";
+        if ($comment->comment_author_email != '' && $jw_wlu_show_level) {
+            global $jw_wlu_level_name,$jw_wlu_level_count;
+            $level = jw_wlu_user_level($comment->comment_author_email, $jw_wlu_admin_email,$jw_wlu_level_name,$jw_wlu_level_count);
         }
-        $os = detect_os();
-        $webbrowser = detect_webbrowser();
+        $os = $jw_wlu_show_os ? jw_wlu_detect_os() : '';
+        $webbrowser = $jw_wlu_show_browser ? jw_wlu_detect_webbrowser() : '';
 
         $ua = '<div class="wp-level-useragent">'.$level.$webbrowser.$os.'</div>';
     }
@@ -93,14 +139,14 @@ function display_level_useragent()
     }
 }
 
-function useragent_output_custom()
+function jw_level_useragent_output_custom()
 {
-    global $ua_output_location, $useragent, $comment;
+    global $jw_wlu_display_position, $useragent, $comment;
 
-    if ($ua_output_location == "custom") {
+    if ($jw_wlu_display_position == "custom") {
         get_currentuserinfo();
         $useragent = wp_strip_all_tags($comment->comment_agent, false);
-        display_useragent();
+        display_level_useragent();
     }
 }
 
@@ -118,8 +164,20 @@ function ua_comment()
 }
 
 
-if ($ua_output_location != 'custom') {
+if ($jw_wlu_display_position != 'custom') {
     add_filter('comment_text', 'wp_level_useragent');
 }
 
-?>
+/**
+ * 添加管理菜单
+ */
+add_action( 'admin_menu', 'jw_wlu_create_menu');
+function jw_wlu_create_menu()
+{
+    add_options_page('WP-Level-UserAgent', 'WP-Level-UserAgent', 'manage_options', __FILE__, 'jw_wlu_options');
+}
+function jw_wlu_options()
+{
+    global $default_options;
+    include_once(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-options.php');
+}
