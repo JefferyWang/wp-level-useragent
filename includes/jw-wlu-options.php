@@ -10,6 +10,7 @@ if (!current_user_can('manage_options'))
 
 if (!empty($_POST)) {
     $options = array();
+    check_admin_referer('update-options');
     foreach ($_POST as $k => $v) {
         if (isset($default_options[$k])) {
             if (is_string($v) && $v) {
