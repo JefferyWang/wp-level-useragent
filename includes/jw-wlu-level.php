@@ -16,8 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function jw_wlu_user_level($user_email, $admin_email, $level_name, $level_count)
-{
+function jw_wlu_user_level($user_email, $admin_email, $level_name, $level_count) {
     global $wpdb;
 
     // 如果为管理员账号，则直接返回

@@ -16,8 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function jw_wlu_detect_os()
-{
+function jw_wlu_detect_os() {
     global $useragent;
 
     $title = "";
@@ -149,7 +148,5 @@ function jw_wlu_detect_os()
         $class = 'os_other';
     }
 
-    $detected_os = '<span class="ua"><span class="' . $class . '"><i class="fa fa-' . $device . '"></i>' . $title . '</span></span>';
-
-    return $detected_os;
+    return '<span class="ua"><span class="' . $class . '"><i class="fa fa-' . $device . '"></i>' . $title . '</span></span>';
 }

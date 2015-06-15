@@ -5,8 +5,9 @@
  * Date: 15-6-13
  * Time: 下午2:26
  */
-if (!current_user_can('manage_options'))
+if (!current_user_can('manage_options')) {
     wp_die('Insufficient privileges!');
+}
 
 if (!empty($_POST)) {
     $options = array();

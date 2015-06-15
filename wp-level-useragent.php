@@ -26,14 +26,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // 检验并设置常用常量
-if (!defined('WP_CONTENT_URL'))
+if (!defined('WP_CONTENT_URL')) {
     define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
-if (!defined('WP_CONTENT_DIR'))
+}
+if (!defined('WP_CONTENT_DIR')) {
     define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-if (!defined('WP_PLUGIN_URL'))
+}
+if (!defined('WP_PLUGIN_URL')) {
     define('WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins');
-if (!defined('WP_PLUGIN_DIR'))
+}
+if (!defined('WP_PLUGIN_DIR')) {
     define('WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
+}
 
 $default_options = array(
     'display_position' => 'after',
@@ -63,8 +67,7 @@ include(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-detect-webbrowser.p
 include(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-level.php');
 
 // 主函数
-function wp_level_useragent()
-{
+function wp_level_useragent() {
     global $comment, $useragent, $jw_wlu_display_position;
 
     get_currentuserinfo();
@@ -80,6 +83,8 @@ function wp_level_useragent()
         add_filter('comment_text', 'wp_level_useragent');
     } elseif ($jw_wlu_display_position == "custom") {
         display_level_useragent();
+    } else {
+
     }
 }
 
@@ -87,8 +92,7 @@ function wp_level_useragent()
  * 插件启用时初始化
  */
 register_activation_hook(__FILE__, 'jw_wlu_active');
-function jw_wlu_active()
-{
+function jw_wlu_active() {
     global $default_options;
     add_option('jw_wp_level_useragent_options', $default_options, '', 'yes');
 }
@@ -96,8 +100,7 @@ function jw_wlu_active()
 /**
  * 添加需要的css文件
  */
-function css()
-{
+function css() {
     wp_register_style('us_css', plugins_url('css/ua.css', __FILE__));
     wp_register_style('font_css', 'http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css');
     if (!is_admin()) {
@@ -113,8 +116,7 @@ if (!is_admin()) {
 /**
  * 展示函数
  */
-function display_level_useragent()
-{
+function display_level_useragent() {
     global $comment, $jw_wlu_admin_email, $jw_wlu_show_level, $jw_wlu_show_os, $jw_wlu_show_browser;
 
     if ($comment->comment_type == 'trackback' || $comment->comment_type == 'pingback') {
@@ -136,8 +138,7 @@ function display_level_useragent()
     }
 }
 
-function jw_level_useragent_output_custom()
-{
+function jw_level_useragent_output_custom() {
     global $jw_wlu_display_position, $useragent, $comment;
 
     if ($jw_wlu_display_position == "custom") {
@@ -148,8 +149,7 @@ function jw_level_useragent_output_custom()
 }
 
 
-function ua_comment()
-{
+function ua_comment() {
     global $comment;
 
     remove_filter('comment_text', 'wp_level_useragent');
@@ -169,13 +169,11 @@ if ($jw_wlu_display_position != 'custom') {
  * 添加管理菜单
  */
 add_action('admin_menu', 'jw_wlu_create_menu');
-function jw_wlu_create_menu()
-{
+function jw_wlu_create_menu() {
     add_options_page('WP-Level-UserAgent', 'WP-Level-UserAgent', 'manage_options', __FILE__, 'jw_wlu_options');
 }
 
-function jw_wlu_options()
-{
+function jw_wlu_options() {
     global $default_options;
     include_once(WP_PLUGIN_DIR . '/wp-level-useragent/includes/jw-wlu-options.php');
 }
@@ -183,8 +181,7 @@ function jw_wlu_options()
 // 添加设置页面链接
 $plugin = plugin_basename(__FILE__);
 add_filter("plugin_action_links_$plugin", 'jw_wlu_plugin_actlinks');
-function jw_wlu_plugin_actlinks($links)
-{
+function jw_wlu_plugin_actlinks($links) {
     $settings_link = '<a href="options-general.php?page=wp-level-useragent%2Fwp-level-useragent.php">设置</a>';
     array_unshift($links, $settings_link);
     return $links;

@@ -16,8 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function jw_wlu_detect_webbrowser()
-{
+function jw_wlu_detect_webbrowser() {
     global $useragent;
 
     if (preg_match('/baidubrowser/i', $useragent)) {
@@ -82,7 +81,5 @@ function jw_wlu_detect_webbrowser()
 
     $icon = isset($icon) ? $icon : 'globe';
 
-    $web_browser = '<span class="ua"><span class="' . $class . '"><i class="fa fa-' . $icon . '"></i> ' . $title . '</span></span>';
-
-    return $web_browser;
+    return '<span class="ua"><span class="' . $class . '"><i class="fa fa-' . $icon . '"></i> ' . $title . '</span></span>';
 }
