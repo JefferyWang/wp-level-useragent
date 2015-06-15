@@ -28,7 +28,8 @@ if (!empty($_POST)) {
     echo '<div class="updated"><p><strong>设置已保存！</strong></p></div>';
 }
 
-$jw_wlu_options = get_option('jw_wp_level_useragent_options', $default_options);
+$jw_wlu_options = get_option('jw_wp_level_useragent_options');
+$jw_wlu_options = $jw_wlu_options ? $jw_wlu_options : $default_options;
 $level_name = $jw_wlu_options['level_name'];
 $level_count = $jw_wlu_options['level_count'];
 ?>
