@@ -7,6 +7,10 @@ wp-level-useragent是Wordpress的一个简单的，可以显示评论者评论�
 
 ![demo](http://i1.tietuku.com/bcaa6be32f80a3d9.png)
 
+github项目地址:  [https://github.com/JefferyWang/wp-level-useragent](https://github.com/JefferyWang/wp-level-useragent)
+
+Git@OSC项目地址:  [http://git.oschina.net/wangjunfeng/wp-level-useragent](http://git.oschina.net/wangjunfeng/wp-level-useragent)
+
 它具有以下特点:
 
 * 所有内容可配置是否显示
